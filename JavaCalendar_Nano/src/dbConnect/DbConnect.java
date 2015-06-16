@@ -1,6 +1,8 @@
 package dbConnect;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 
 
@@ -22,5 +24,25 @@ private static DbConnect instance=null;
 		}
 		return instance;
 	} 
+	private boolean openConnection(){
+		try {
+			conn=DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
+	public Connection getConnection(){
+		if(conn==null){
+			if(openConnection()){
+				System.out.println("connection opened");
+				return conn;
+			}else{
+				return null;
+			}
+		}
+		return conn;
+	}
 }
