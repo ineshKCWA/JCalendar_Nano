@@ -45,4 +45,13 @@ private static DbConnect instance=null;
 		}
 		return conn;
 	}
+	public void close(){
+		System.out.println("closing connection");
+		try {
+			conn.close();
+			conn=null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
